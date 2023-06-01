@@ -14,6 +14,19 @@ export class App extends Component {
     ],
     filter: '',
   };
+
+  componentDidUpdate = () => {
+    const contactsFromState = this.state.contacts;
+    let arrayOfPersons = [];
+     contactsFromState.map(contact => {
+       arrayOfPersons.push(contact);
+       
+      localStorage.setItem('Persons',JSON.stringify(arrayOfPersons))
+
+    });
+      
+   }
+  
   render() {
     const handleSubmit = e => {
       e.preventDefault();
@@ -50,6 +63,9 @@ export class App extends Component {
       });
     };
 
+
+   
+
     return (
       <div
         style={{
@@ -63,7 +79,7 @@ export class App extends Component {
         }}
       >
         <h2>Phonebook</h2>
-        <ContactForm submit={handleSubmit} />
+        <ContactForm submit={handleSubmit} state={this.state} />
         <h2>Contacts</h2>
         <Filter filerUsers={filterUsers} />
         <ContactList state={this.state} />

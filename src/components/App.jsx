@@ -15,19 +15,19 @@ export class App extends Component {
     filter: '',
   };
   
-  componentDidMount = () => {
+ componentDidMount = () => {
     this.state.contacts.map(contact => {
-        localStorage.setItem(contact.name,JSON.stringify(contact))
+        localStorage.setItem(contact.id,JSON.stringify(contact))
       })
   }
 
-  componentDidUpdate = () => {
-    for (let i = 4; i < this.state.contacts.length; i++){
+  // componentDidUpdate = () => {
+  //   for (let i = 4; i < this.state.contacts.length; i++){
       
-      let contact = this.state.contacts[i];
-      localStorage.setItem(contact.name,JSON.stringify(contact))
-    }
-   }
+  //     let contact = this.state.contacts[i];
+  //     localStorage.setItem(contact.id,JSON.stringify(contact))
+  //   }
+  //  }
   
   render() {
     const handleSubmit = e => {

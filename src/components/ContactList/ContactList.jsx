@@ -5,21 +5,13 @@ import propTypes from 'prop-types';
 export class ContactList extends Component {
 
   // componentDidUpdate = () => {
-
-  //   let PersonsInStorage = localStorage.getItem('Persons');
-  //   JSON.parse(PersonsInStorage).map(person => {
-  //     if (person.id === this.state[0].id) {
-  //      localStorage.removeItem(this.state[0])
-  //    }
-  //   })
-   
-
-
-    
+  //   let itemToRemove = this.state[0].id;
+  //   localStorage.removeItem(itemToRemove);
+ 
   // }
+
   render() {
     const { state } = this.props;
-
     return (
       <div>
         {state.contacts
@@ -30,7 +22,7 @@ export class ContactList extends Component {
               {''}
               {contact.number}
               <button
-                onClick={(e) => {
+                onClick={() => {
                   let index = state.contacts.indexOf(contact);
                   this.setState(state.contacts.splice(index, 1));
                   

@@ -2,9 +2,13 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export class ContactForm extends Component {
+
+  componentDidUpdate = () => {
+    console.log(this.state)
+  }
   render() {
-    const { submit} = this.props;
-    
+    const {submit} = this.props;
+  
     return (
       <form onSubmit={submit}>
         <label>Name</label>

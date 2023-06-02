@@ -14,17 +14,19 @@ export class App extends Component {
     ],
     filter: '',
   };
+  
+  componentDidMount = () => {
+    this.state.contacts.map(contact => {
+        localStorage.setItem(contact.name,JSON.stringify(contact))
+      })
+  }
 
   componentDidUpdate = () => {
-    const contactsFromState = this.state.contacts;
-    let arrayOfPersons = [];
-     contactsFromState.map(contact => {
-       arrayOfPersons.push(contact);
-       
-      localStorage.setItem('Persons',JSON.stringify(arrayOfPersons))
-
-    });
+    for (let i = 4; i < this.state.contacts.length; i++){
       
+      let contact = this.state.contacts[i];
+      localStorage.setItem(contact.name,JSON.stringify(contact))
+    }
    }
   
   render() {

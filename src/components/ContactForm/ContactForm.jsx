@@ -2,16 +2,6 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export class ContactForm extends Component {
-
-  componentDidUpdate = () => {
-    // const contactsFromState = prevState.state.contacts;
-
-   
-    // console.log(this.state)
-    // localStorage.setItem('Person',)
-    
-  }
-  
   render() {
     const { submit} = this.props;
     

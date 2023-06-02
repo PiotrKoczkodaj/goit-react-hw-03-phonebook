@@ -3,6 +3,20 @@ import { nanoid } from 'nanoid';
 import propTypes from 'prop-types';
 
 export class ContactList extends Component {
+
+  // componentDidUpdate = () => {
+
+  //   let PersonsInStorage = localStorage.getItem('Persons');
+  //   JSON.parse(PersonsInStorage).map(person => {
+  //     if (person.id === this.state[0].id) {
+  //      localStorage.removeItem(this.state[0])
+  //    }
+  //   })
+   
+
+
+    
+  // }
   render() {
     const { state } = this.props;
 
@@ -16,9 +30,10 @@ export class ContactList extends Component {
               {''}
               {contact.number}
               <button
-                onClick={() => {
+                onClick={(e) => {
                   let index = state.contacts.indexOf(contact);
                   this.setState(state.contacts.splice(index, 1));
+                  
                 }}
                 value={contact.name}
               >

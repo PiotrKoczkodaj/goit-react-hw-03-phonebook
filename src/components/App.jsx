@@ -14,21 +14,40 @@ export class App extends Component {
     ],
     filter: '',
   };
-  
- componentDidMount = () => {
+
+componentDidMount = () => {
+    let array = [];
     this.state.contacts.map(contact => {
-        localStorage.setItem(contact.id,JSON.stringify(contact))
-      })
-  }
+      array.push(contact);
+      localStorage.setItem('Persons', JSON.stringify(array));
+    });
+  };
+
+  // componentDidMount = () => {
+  //   this.state.contacts.map(contact => {
+  //     localStorage.setItem(contact.id, JSON.stringify(contact));
+  //   });
+  // };
+
+  componentDidUpdate = () => {
+
+    let personsFromStorageToParse = localStorage.getItem('Persons');
+    let personsFromStage = JSON.parse(personsFromStorageToParse);
+    let contacts = this.state.contacts;
+    let addedPerson = contacts[contacts.length - 1];
+    
+    personsFromStage.push(addedPerson);
+    localStorage.setItem('Persons',JSON.stringify(contacts))
+   }
 
   // componentDidUpdate = () => {
   //   for (let i = 4; i < this.state.contacts.length; i++){
-      
+
   //     let contact = this.state.contacts[i];
   //     localStorage.setItem(contact.id,JSON.stringify(contact))
   //   }
   //  }
-  
+
   render() {
     const handleSubmit = e => {
       e.preventDefault();
@@ -64,9 +83,6 @@ export class App extends Component {
         filter: e.target.value.toUpperCase(),
       });
     };
-
-
-   
 
     return (
       <div

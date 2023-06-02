@@ -4,11 +4,17 @@ import propTypes from 'prop-types';
 
 export class ContactList extends Component {
 
-  // componentDidUpdate = () => {
-  //   let itemToRemove = this.state[0].id;
-  //   localStorage.removeItem(itemToRemove);
+//   componentDidUpdate = (prevProps,prevState,snapshot) => {
+//     // let itemToRemove = this.state[0].id;
+//     // localStorage.removeItem(itemToRemove);
+//  console.log(this.state)
+//   }
+
+componentDidUpdate = () => {
+    let itemToRemove = this.state[0].id;
+    localStorage.removeItem(itemToRemove);
  
-  // }
+  }
 
   render() {
     const { state } = this.props;

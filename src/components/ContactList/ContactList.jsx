@@ -10,7 +10,7 @@ export class ContactList extends Component {
     return (
       <div>
         
-         {state.contacts.filter(contact => contact.name.includes(state.filter.toUpperCase()))
+         {JSON.parse(localStorage.getItem('Persons')).filter(contact => contact.name.includes(state.filter.toUpperCase()))
           .map(contact => (
             <p key={nanoid()}>
               {contact.name}

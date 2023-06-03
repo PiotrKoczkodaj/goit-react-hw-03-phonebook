@@ -54,7 +54,7 @@ export class App extends Component {
           this.setState({
             contacts: this.state.contacts,
           });
-          return alert(`${nameValue} is already in contacts`);
+          alert(`${nameValue} is already in contacts`);
         }
         return null;
       });

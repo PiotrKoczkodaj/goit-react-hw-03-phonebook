@@ -39,6 +39,7 @@ export class ContactList extends Component {
                         JSON.stringify(localStoragePersons)
                       );
                     }
+                    return null
                   });
                 }}
                 value={contact.name}

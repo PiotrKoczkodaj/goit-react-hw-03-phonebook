@@ -16,25 +16,11 @@ export class App extends Component {
   };
 
   componentDidMount = () => {
-  
-  if (localStorage.getItem('Persons') === null) {
-    localStorage.setItem('Persons', JSON.stringify(this.state.contacts))
-  } 
-  
+    if (localStorage.getItem('Persons') === null) {
+      localStorage.setItem('Persons', JSON.stringify(this.state.contacts));
+    }
   };
 
-  // componentDidUpdate = () => {
-
-  //   let personsFromStorageToParse = localStorage.getItem('Persons');
-  //   let personsFromStage = JSON.parse(personsFromStorageToParse);
-  //   let contacts = this.state.contacts;
-  //   let addedPerson = contacts[contacts.length - 1];
-    
-  //   personsFromStage.push(addedPerson);
-  //   localStorage.setItem('Persons',JSON.stringify(contacts))
-  //  }
-
-  
   render() {
     const handleSubmit = e => {
       e.preventDefault();
@@ -54,15 +40,15 @@ export class App extends Component {
         filter: '',
       });
 
-           let gettingPersons = localStorage.getItem('Persons');
+      let gettingPersons = localStorage.getItem('Persons');
       gettingPersons = JSON.parse(gettingPersons);
       gettingPersons.push({
-            name: nameValue,
-            id: nanoid(),
-            number: number,
-     });
-      localStorage.setItem('Persons',JSON.stringify(gettingPersons))
-      
+        name: nameValue,
+        id: nanoid(),
+        number: number,
+      });
+      localStorage.setItem('Persons', JSON.stringify(gettingPersons));
+
       return this.state.contacts.map(contact => {
         if (contact.name === nameValue) {
           this.setState({
@@ -70,7 +56,7 @@ export class App extends Component {
           });
           return alert(`${nameValue} is already in contacts`);
         }
-   return null
+        return null;
       });
     };
 

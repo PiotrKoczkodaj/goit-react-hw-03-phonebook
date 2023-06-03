@@ -6,11 +6,18 @@ export class ContactList extends Component {
 
   render() {
     const { state } = this.props;
-   
+
+    const itemToIterate = () => {
+      if (JSON.parse(localStorage.getItem('Persons')) === null) {
+        return state.contacts
+      } else {
+        return JSON.parse(localStorage.getItem('Persons'))
+      }
+   }
     return (
       <div>
         
-         {JSON.parse(localStorage.getItem('Persons')).filter(contact => contact.name.includes(state.filter.toUpperCase()))
+         {itemToIterate().filter(contact => contact.name.includes(state.filter.toUpperCase()))
           .map(contact => (
             <p key={nanoid()}>
               {contact.name}

@@ -15,39 +15,26 @@ export class App extends Component {
     filter: '',
   };
 
-componentDidMount = () => {
-    let array = [];
-    this.state.contacts.map(contact => {
-      array.push(contact);
-      localStorage.setItem('Persons', JSON.stringify(array));
-    });
+  componentDidMount = () => {
+  
+  if (localStorage.getItem('Persons') === null) {
+    localStorage.setItem('Persons', JSON.stringify(this.state.contacts))
+  } 
+  
   };
 
-  // componentDidMount = () => {
-  //   this.state.contacts.map(contact => {
-  //     localStorage.setItem(contact.id, JSON.stringify(contact));
-  //   });
-  // };
-
-  componentDidUpdate = () => {
-
-    let personsFromStorageToParse = localStorage.getItem('Persons');
-    let personsFromStage = JSON.parse(personsFromStorageToParse);
-    let contacts = this.state.contacts;
-    let addedPerson = contacts[contacts.length - 1];
-    
-    personsFromStage.push(addedPerson);
-    localStorage.setItem('Persons',JSON.stringify(contacts))
-   }
-
   // componentDidUpdate = () => {
-  //   for (let i = 4; i < this.state.contacts.length; i++){
 
-  //     let contact = this.state.contacts[i];
-  //     localStorage.setItem(contact.id,JSON.stringify(contact))
-  //   }
+  //   let personsFromStorageToParse = localStorage.getItem('Persons');
+  //   let personsFromStage = JSON.parse(personsFromStorageToParse);
+  //   let contacts = this.state.contacts;
+  //   let addedPerson = contacts[contacts.length - 1];
+    
+  //   personsFromStage.push(addedPerson);
+  //   localStorage.setItem('Persons',JSON.stringify(contacts))
   //  }
 
+  
   render() {
     const handleSubmit = e => {
       e.preventDefault();
@@ -67,6 +54,15 @@ componentDidMount = () => {
         filter: '',
       });
 
+           let gettingPersons = localStorage.getItem('Persons');
+      gettingPersons = JSON.parse(gettingPersons);
+      gettingPersons.push({
+            name: nameValue,
+            id: nanoid(),
+            number: number,
+     });
+      localStorage.setItem('Persons',JSON.stringify(gettingPersons))
+      
       return this.state.contacts.map(contact => {
         if (contact.name === nameValue) {
           this.setState({
@@ -74,7 +70,7 @@ componentDidMount = () => {
           });
           return alert(`${nameValue} is already in contacts`);
         }
-        return null;
+   return null
       });
     };
 

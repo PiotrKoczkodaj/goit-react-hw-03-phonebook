@@ -5,7 +5,6 @@ import propTypes from 'prop-types';
 export class ContactList extends Component {
   render() {
     const { state } = this.props;
-
     const itemToIterate = () => {
       if (JSON.parse(localStorage.getItem('Persons')) === null) {
         return state.contacts;
@@ -29,7 +28,6 @@ export class ContactList extends Component {
                   let localStoragePersons = JSON.parse(
                     localStorage.getItem('Persons')
                   );
-
                   localStoragePersons.map(person => {
                     if (person.name === e.currentTarget.value) {
                       let index = localStoragePersons.indexOf(person);

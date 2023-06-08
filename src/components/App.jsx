@@ -14,58 +14,51 @@ export class App extends Component {
     ],
     filter: '',
   };
-
   componentDidMount = () => {
     if (localStorage.getItem('Persons') === null) {
       localStorage.setItem('Persons', JSON.stringify(this.state.contacts));
     }
   };
-
+  handleSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const nameValue = form.elements[0].value;
+    const number = form.elements[1].value;
+    this.setState({
+      contacts: [
+        ...this.state.contacts,
+        {
+          name: nameValue,
+          id: nanoid(),
+          number: number,
+        },
+      ],
+      filter: '',
+    });
+    let gettingPersons = localStorage.getItem('Persons');
+    gettingPersons = JSON.parse(gettingPersons);
+    gettingPersons.push({
+      name: nameValue,
+      id: nanoid(),
+      number: number,
+    });
+    localStorage.setItem('Persons', JSON.stringify(gettingPersons));
+    return this.state.contacts.map(contact => {
+      if (contact.name === nameValue) {
+        this.setState({
+          contacts: this.state.contacts,
+        });
+        alert(`${nameValue} is already in contacts`);
+      }
+      return null;
+    });
+  };
+  filterUsers = e => {
+    this.setState({
+      filter: e.target.value.toUpperCase(),
+    });
+  };
   render() {
-    const handleSubmit = e => {
-      e.preventDefault();
-      const form = e.currentTarget;
-      const nameValue = form.elements[0].value;
-      const number = form.elements[1].value;
-
-      this.setState({
-        contacts: [
-          ...this.state.contacts,
-          {
-            name: nameValue,
-            id: nanoid(),
-            number: number,
-          },
-        ],
-        filter: '',
-      });
-
-      let gettingPersons = localStorage.getItem('Persons');
-      gettingPersons = JSON.parse(gettingPersons);
-      gettingPersons.push({
-        name: nameValue,
-        id: nanoid(),
-        number: number,
-      });
-      localStorage.setItem('Persons', JSON.stringify(gettingPersons));
-
-      return this.state.contacts.map(contact => {
-        if (contact.name === nameValue) {
-          this.setState({
-            contacts: this.state.contacts,
-          });
-          alert(`${nameValue} is already in contacts`);
-        }
-        return null;
-      });
-    };
-
-    const filterUsers = e => {
-      this.setState({
-        filter: e.target.value.toUpperCase(),
-      });
-    };
-
     return (
       <div
         style={{
@@ -79,9 +72,9 @@ export class App extends Component {
         }}
       >
         <h2>Phonebook</h2>
-        <ContactForm submit={handleSubmit} state={this.state} />
+        <ContactForm submit={this.handleSubmit} state={this.state} />
         <h2>Contacts</h2>
-        <Filter filerUsers={filterUsers} />
+        <Filter filter={this.filterUsers} />
         <ContactList state={this.state} />
       </div>
     );
